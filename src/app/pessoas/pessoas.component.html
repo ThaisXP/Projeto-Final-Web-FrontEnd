@@ -1,0 +1,135 @@
+<div class="display-6 bg-secondary text-center text-light p-3">
+  Cadastro de Pessoas
+</div>
+
+<form [formGroup]="formGroupPessoa" class="mt-4">
+  <div class="mb-3 d-flex align-items-center">
+    <label for="nome" class="col-sm-1 col-form-label">Nome:</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="nome" formControlName="nome" name="nome"/>
+      <small *ngIf="submited && nome.hasError('required')" class="text-danger">
+        *O nome é requirido!
+      </small>
+      <small *ngIf="submited && nome.hasError('minlength')" class="text-danger">
+        *O nome tem que ter no mínimo 3 caracteres!
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-3 d-flex align-items-center">
+    <label for="email" class="col-sm-1 col-form-label">Email:</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="email" formControlName="email" name="email"/>
+      <small *ngIf="submited && email.hasError('required')" class="text-danger">
+        *O e-mail é requirido!
+      </small>
+      <small *ngIf="submited && email.hasError('minlength')" class="text-danger">
+        *O e-mail tem que ter no mínimo 5 caracteres!
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-3 d-flex align-items-center">
+    <label for="telefone" class="col-sm-1 col-form-label">Telefone:</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="telefone" formControlName="telefone" name="telefone"/>
+      <small *ngIf="submited && telefone.hasError('required')" class="text-danger">
+        *O telefone é requirido!
+      </small>
+      <small *ngIf="submited && telefone.hasError('minlength')" class="text-danger">
+        *O telefone tem que ter no mínimo 10 caracteres!
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-3 d-flex align-items-center">
+    <label for="endereco" class="col-sm-1 col-form-label">Endereco:</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="endereco" formControlName="endereco" name="endereco"/>
+      <small *ngIf="submited && endereco.hasError('required')" class="text-danger">
+        *O endereco é requirido!
+      </small>
+      <small *ngIf="submited && endereco.hasError('minlength')" class="text-danger">
+        *O endereco tem que ter no mínimo 3 caracteres!
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-3 d-flex align-items-center">
+    <label for="cidade" class="col-sm-1 col-form-label">Cidade:</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="cidade" formControlName="cidade" name="cidade"/>
+      <small *ngIf="submited && cidade.hasError('required')" class="text-danger">
+        *A cidade é requirido!
+      </small>
+      <small *ngIf="submited && cidade.hasError('minlength')" class="text-danger">
+        *A cidade tem que ter no mínimo 3 caracteres!
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-3 d-flex align-items-center">
+    <label for="cep" class="col-sm-1 col-form-label">CEP:</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="cep" formControlName="cep" name="cep"/>
+      <small *ngIf="submited && cep.hasError('required')" class="text-danger">
+        *O cep é requirido!
+      </small>
+      <small *ngIf="submited && cep.hasError('minlength')" class="text-danger">
+        *O cep tem que ter no mínimo 8 caracteres!
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-3 d-flex align-items-center">
+    <label for="estado" class="col-sm-1 col-form-label">Estado:</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="estado" formControlName="estado" name="estado"/>
+      <small *ngIf="submited && estado.hasError('required')" class="text-danger">
+        *O estado é requirido!
+      </small>
+      <small *ngIf="submited && estado.hasError('minlength')" class="text-danger">
+        *O estado tem que ter no mínimo 2 caracteres!
+      </small>
+    </div>
+  </div>
+
+  <div class="d-flex">
+    <button class="btn btn-primary me-2" (click)="save()">Salvar</button>
+    <button class="btn btn-primary" (click)="cancel()">Cancelar</button>
+  </div>
+
+  <div class="mb-3 d-flex align-items-center mt-4">
+  <label for="busca" class="col-sm-3 col-form-label">Buscar pessoa - Por nome ou e-mail:</label>
+  <div class="d-flex align-items-center">
+    <input type="text" class="form-control me-2" id="busca" formControlName="busca" name="busca" />
+    <button class="btn btn-primary me-2" (click)="onSearchChange()">Buscar</button>
+    <button class="btn btn-primary" (click)="cancelSearch()">Cancelar</button>
+  </div>
+</div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col-1">Id</th>
+      <th scope="col-3">Nome</th>
+      <th scope="col-3">E-mail</th>
+      <th scope="col-1.5">Telefone</th>
+      <th scope="col-3.5" class="text-center">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of pessoas">
+      <th scope="row" class="col-1">{{ p.id }}</th>
+      <td class="col-3">{{ p.nome }}</td>
+      <td class="col-3">{{ p.email }}</td>
+      <td class="col-1.5">{{ p.telefone }}</td>
+      <td class="text-end col-3.5">
+        <button class="btn btn-danger me-2" (click)="delete(p)">Remover</button>
+        <button class="btn btn-success me-2" (click)="edit(p)">Editar</button>
+        <button class="btn btn-primary" (click)="select(p)">Selecionar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
