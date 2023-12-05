@@ -43,10 +43,6 @@ export class PessoaService {
       });
     }
 
-    //onSearchChange(searchTerm: string): void {
-    //  this.filteredPessoa = this.filterByNomeAndEmail(this.pessoas, searchTerm);
-    //}
-
     onSearchChange(pessoas: Pessoa[], searchTerm: string): Pessoa[] {
       return this.filterByNomeAndEmail(pessoas, searchTerm);
     }
