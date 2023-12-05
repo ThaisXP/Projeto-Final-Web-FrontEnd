@@ -34,22 +34,12 @@ export class PessoasComponent implements OnInit{
     });
   }
 
-  //ngOnInit(): void {
-  //  this.pessoaService.getPessoas().subscribe(
-  //    {
-  //      next: pessoas => this.pessoas = pessoas
-  //    }
-  //  )
-  //}
-
   ngOnInit(): void {
-    this.getAllPeople();
-  }
-
-  getAllPeople(): void {
-    this.pessoaService.getPessoas().subscribe((pessoa: Pessoa[]) => {
-      this.pessoas = pessoa;
-    });
+    this.pessoaService.getPessoas().subscribe(
+      {
+        next: pessoas => this.pessoas = pessoas
+      }
+    )
   }
 
   save() {
@@ -90,7 +80,7 @@ export class PessoasComponent implements OnInit{
     this.selectedPessoa = pessoa;
     this.isEditing = true;
     this.formGroupPessoa.setValue({ "nome": pessoa.nome, "email": pessoa.email, "telefone": pessoa.telefone,
-    "endereco": pessoa.endereco, "cidade": pessoa.cidade, "cep": pessoa.cep, "estado": pessoa.estado});
+    "endereco": pessoa.endereco, "cidade": pessoa.cidade, "cep": pessoa.cep, "estado": pessoa.estado, "busca": ""});
   }
 
   delete(pessoa: Pessoa) {
@@ -115,7 +105,7 @@ export class PessoasComponent implements OnInit{
   select(pessoa: Pessoa) {
     this.selectedPessoa = pessoa;
     this.formGroupPessoa.setValue({ "nome": pessoa.nome, "email": pessoa.email, "telefone": pessoa.telefone,
-    "endereco": pessoa.endereco, "cidade": pessoa.cidade, "cep": pessoa.cep, "estado": pessoa.estado});
+    "endereco": pessoa.endereco, "cidade": pessoa.cidade, "cep": pessoa.cep, "estado": pessoa.estado, "busca": ""});
   }
 
   onSearchChange(): void {
